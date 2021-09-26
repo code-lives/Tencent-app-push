@@ -3,15 +3,12 @@
 [官方接口文档](https://cloud.tencent.com/document/product/548/39059)
 
 
-# 参数说明
+# 请求
  | 参数名字     | 类型   | 说明                                                                    |
  | ------------ | ------ | ----------------------------------------------------------------------- |
  | appid        | string | 申请的appid                                                             |
- | secretKey    | string | ｜申请的appsecretkey                                                    |
+ | secretKey    | string | 申请的appsecretkey                                                      |
  | message_type | string | 消息类型 【notify】 通知【message】 透传消息/静默消息 【没有就是默认]】 |
-
-
-
 
  # 发送消息（全部app）
  ```
