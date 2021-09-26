@@ -1,0 +1,17 @@
+{
+    "name": "code-lives/app-push-tpns",
+    "description": "this is app push",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lijie",
+            "email": "1873451007@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+    "psr-4":{"tencent\\apppush\\":"src"}
+    }
+}
