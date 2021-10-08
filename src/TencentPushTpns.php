@@ -45,7 +45,7 @@ class TencentPushTpns
             'audience_type' => 'all',
             'message' => $content,
             'message_type' => $message_type,
-            'environment' => $message_type,
+            'environment' => 'product',
         ];
         return $this->Push($arr, $this->get_url('APP_PUSH'));
     }

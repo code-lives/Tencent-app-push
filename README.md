@@ -37,7 +37,7 @@
 
     $app_push = new AppPush($config);
 
-    $app_push->send_all($content,message_type);
+    $app_push->send_all($content,$message_type);
 
  ```
  # 单发信息
@@ -52,6 +52,6 @@
 
     $app_push = new AppPush($config);
 
-    $app_push->send_all($content,message_type);
+    $app_push->send_all($content,$message_type);
 
  ```
