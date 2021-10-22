@@ -1,6 +1,6 @@
 {
     "name": "code-lives/app-push-tpns",
-    "description": "this is app push",
+    "description": "腾讯 移动推送 TPNS",
     "type": "library",
     "license": "MIT",
     "authors": [
