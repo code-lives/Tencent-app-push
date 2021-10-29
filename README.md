@@ -1,4 +1,4 @@
-# 腾讯 移动推送 TPNS
+# 腾讯 移动推送 TPNS（点个收藏是我前进的动力）
 
 [官方接口文档](https://cloud.tencent.com/document/product/548/39059)
 
