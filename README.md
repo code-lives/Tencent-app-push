@@ -120,7 +120,7 @@ composer require code-lives/app-push-tpns 1.0.0
    $app_push->account_save($operator_type, $array);
  ```
 
-  # 账号绑定与解绑
+  # 账号查询
  > array 根据开发文档->账号相关接口->账号设备绑定查询
 
  | 参数名字      | 类型  | 说明                                                                            |
