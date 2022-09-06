@@ -1,7 +1,10 @@
 # 腾讯 移动推送 TPNS（点个收藏是我前进的动力）
 
 [官方接口文档](https://cloud.tencent.com/document/product/548/39059)
-
+# 安装
+```
+composer require code-lives/app-push-tpns 1.0.0
+```
 
 # 配置参数说明
 > 需要配置的参数
