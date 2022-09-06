@@ -6,23 +6,13 @@ class TencentPushTpns
 {
     private $parm_url = [
         'APP_PUSH' => "v3/push/app", //推送通知与应用内消息接口
+        "TAG" => 'v3/device/tag', //标签绑定
+        'DELETE_TAG' => 'v3/device/tag/delete_all_device', //删除标签下所有设备
         'ACCOUNT_TOKEN_UPLOAD' => 'v3/push/package/upload', //1.号码包上传接口 2.token包上传接口
         'ACCOUNT_BIND' => 'v3/device/account/batchoperate', //	账号绑定与解绑接口
     ];
 
-    //推送目标
-    const AUDIENCE_ALL               = "all"; //全量推送
-    const AUDIENCE_TAG               = "tag"; //标签推送
-    const AUDIENCE_TOKEN             = "token"; //单设备推送
-    const AUDIENCE_TOKEN_LIST        = "token_list"; //设备列表推送
-    const AUDIENCE_ACCOUNT           = "account"; //单账号推送
-    const AUDIENCE_ACCOUNT_LIST      = "account_list"; //账号列表推送
-    const AUDIENCE_ACCOUNT_PACKAGE   = "package_account_push"; //号码包推送
-    const AUDIENCE_TOKEN_PACKAGE     = "package_token_push"; //token 文件包推送
-
-    public $tag_type = "all";
     public $url = 'https://api.tpns.tencent.com/';
-    public $sign;
     public $appid;
     public $secretKey;
 
@@ -30,6 +20,7 @@ class TencentPushTpns
     {
         $this->appid = $config['appid'];
         $this->secretKey = $config['secretKey'];
+        $this->environment = empty($config['environment']) ?  "product" : $config['environment'];
     }
     /**
      * 全员发送消息【安装App的】
@@ -39,37 +30,91 @@ class TencentPushTpns
      * @param string $message_type
      *
      */
-    public  function send_all($content, $message_type = 'notify')
+    public function send_all($content, $message_type = 'notify')
     {
         $arr = [
-            'audience_type' => 'all',
+            'audience_type' => "all",
             'message' => $content,
             'message_type' => $message_type,
-            'environment' => 'product',
+            'environment' => $this->environment,
+        ];
+
+        return $this->Push($arr, $this->get_url('APP_PUSH'));
+    }
+    /**
+     * 标签推送
+     *
+     * @param  string $content
+     * @param  array $tag_array
+     * @param  string $message_type
+     */
+    public function send_tag($content, $tag_array, $message_type = 'notify')
+    {
+        $arr = [
+            'audience_type' => "tag",
+            'tag_items' => $tag_array,
+            'message' => $content,
+            'message_type' => $message_type,
+            'environment' => $this->environment,
         ];
         return $this->Push($arr, $this->get_url('APP_PUSH'));
     }
     /**
-     * 一对一发送消息
+     * 设备推送
+     * @param  string $content
+     * @param  array $token_array
+     * @param  string $message_type
+     */
+    public function send_token($content, $token_array, $message_type = 'notify')
+    {
+        $arr = [
+            'audience_type' => (count($token_array) > 1) ? "token_list" : "token",
+            'token_list' => $token_array,
+            'message' => $content,
+            'message_type' => $message_type,
+            'environment' => $this->environment,
+        ];
+        return $this->Push($arr, $this->get_url('APP_PUSH'));
+    }
+    /**
+     * 账号推送发送消息
      *
      * @param array $content 内容
      * @param string $account 用户账号
      * @param string $message_type 类型
      *
      */
-    public function send_account($content, $account, $message_type = 'notify')
+
+    public function send_account($content, $account_array, $message_type = 'notify')
     {
 
         $arr = [
-            'audience_type' => self::AUDIENCE_ACCOUNT,
+            'audience_type' => (count($account_array) > 1) ? "account_list" : "account",
             'message' => $content,
             'message_type' => $message_type,
-            'environment' => 'product',
-            'account_list' => [
-                $account
-            ],
+            'environment' => $this->environment,
+            'account_list' => $account_array,
         ];
         return $this->Push($arr, $this->get_url('APP_PUSH'));
+    }
+    /**
+     * 标签绑定与解绑
+     *
+     * @param  int    $operator_type
+     * @param  array  $array
+     * @param  array  $tag_array
+     */
+    public function set_tag($operator_type, $array = [], $tag_array = [])
+    {
+        $arr = [
+            'operator_type' => $operator_type
+        ];
+        return $this->Push(array_merge($arr,  $array, $tag_array), $this->get_url('TAG'));
+    }
+
+    public function delete_tag($array)
+    {
+        return $this->Push($array, $this->get_url('DELETE_TAG'));
     }
     /**
      * 获取 sign
@@ -132,25 +177,14 @@ class TencentPushTpns
         $ret = curl_exec($ch);
         $error = curl_error($ch);
         $info = curl_getinfo($ch);
-
         curl_close($ch);
-
         if ($error != "") {
             throw new \Exception($error);
         }
-
         $code = $info["http_code"];
-
         if ($code != 200) {
             throw new \Exception("status: " . $code . ", message: " . $ret);
         }
-
-        $arr = json_decode($ret, 1);
-        return $arr;
-        if ($arr['ret_code'] == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return json_decode($ret, true);
     }
 }
