@@ -10,6 +10,7 @@ class TencentPushTpns
         'DELETE_TAG' => 'v3/device/tag/delete_all_device', //删除标签下所有设备
         'ACCOUNT_TOKEN_UPLOAD' => 'v3/push/package/upload', //1.号码包上传接口 2.token包上传接口
         'ACCOUNT_BIND' => 'v3/device/account/batchoperate', //	账号绑定与解绑接口
+        'ACCOUNT_QUERY' => 'v3/device/account/query', //账号设备绑定查询
     ];
 
     public $url = 'https://api.tpns.tencent.com/';
@@ -115,6 +116,35 @@ class TencentPushTpns
     public function delete_tag($array)
     {
         return $this->Push($array, $this->get_url('DELETE_TAG'));
+    }
+
+    /**
+     * 账号 绑定或者删除
+     *
+     * @param  int    $operator_type
+     * @param  array  $array
+     *
+     */
+    public function account_save($operator_type, $array)
+    {
+        $arr = [
+            'operator_type' => $operator_type,
+        ];
+        return $this->Push(array_merge($arr, $array), $this->get_url('ACCOUNT_BIND'));
+    }
+    /**
+     * 账号查询
+     *
+     * @param  int    $operator_type
+     * @param  array  $array
+     *
+     */
+    public function account_query($operator_type, $array)
+    {
+        $arr = [
+            'operator_type' => $operator_type,
+        ];
+        return $this->Push(array_merge($arr, $array), $this->get_url('ACCOUNT_QUERY'));
     }
     /**
      * 获取 sign
