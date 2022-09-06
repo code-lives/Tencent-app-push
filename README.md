@@ -10,7 +10,6 @@
  | ------------ | ------ | ----------------------------------------------------------------------------------- |
  | appid        | string | 申请的appid                                                                         |
  | secretKey    | string | 申请的appsecretkey                                                                  |
- | message_type | string | 消息类型 【notify】 通知【message】 透传消息/静默消息 【没有就是默认】              |
  | environment  | string | 用户指定推送环境，仅限 iOS 平台推送使用 默认 product；推送生产环境；dev推送开发环境 |
 
  ### Config Demo
