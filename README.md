@@ -22,7 +22,6 @@
         'message_type' => '',
         'environment'=>''
     ];
-
  ```
 
  # 全量推送
@@ -34,7 +33,6 @@
         ];
     $app_push = new AppPush($config);
     $app_push->send_all($content,'notify');
-
  ```
  # 单账号推送或多账号推送
  > 一对一给用户发送消息 或 多个账号发送消息
@@ -48,7 +46,6 @@
     $account=['one'];//单账号推送
     $account=['one','two'];//多个账号推送
     $app_push->send_account($content, $account,$message_type);
-
  ```
  # 单设备推送或多设备推送
  > 单或多设备推送 传递数量判断
@@ -62,7 +59,6 @@
     $token=['one'];//单设备推送
     $token=['one','two'];//多个设备推送
     $app_push->send_token($content, $token,$message_type);
-
  ```
   # 标签推送
  > tag 字段根据开发文档 tag_items 字段 自定义
@@ -74,7 +70,6 @@
  | message_type | string | 默认：notify(可不传); notify：通知;message：透传消息/静默消息 |
  ```
     $app_push->send_tag($content, $tag,$message_type);
-
  ```
 
   # 标签绑定与解绑
@@ -96,7 +91,6 @@
    $operator_type = 9;
    $array = ['tag_token_list' => []];
    $app_push->set_tag($operator_type, $array = []);
-
  ```
    # 删除标签下所有设备
 
@@ -105,5 +99,4 @@
  | tag_list      | array | 待删除标签列表："tag_list": ["test_tag_3_Ik0N0", "test_tag_2_Ik0N0"]                                                          |
  ```
     $app_push->delete_tag(['tag_list'=>[]]);
-
  ```
