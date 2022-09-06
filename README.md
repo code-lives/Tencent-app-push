@@ -99,6 +99,39 @@ composer require code-lives/app-push-tpns 1.0.0
  | 参数名字     | 类型   | 说明                                                          |
  | ------------ | ------ | ------------------------------------------------------------- |
  | tag_list      | array | 待删除标签列表："tag_list": ["test_tag_3_Ik0N0", "test_tag_2_Ik0N0"]                                                          |
+ 
  ```
     $app_push->delete_tag(['tag_list'=>[]]);
  ```
+
+  # 账号绑定与解绑
+ > array 根据开发文档->账号相关接口->账号绑定与解绑 
+
+ | 参数名字      | 类型  | 说明                                                                            |
+ | ------------- | ----- | ------------------------------------------------------------------------------- |
+ | operator_type | int   | 类型看官方文档1-10                                                              |
+ | array         | array | 查看文档|
+
+ ```
+   $operator_type = 1;
+   $array = ['account_list' => []];
+   $array = ['token_list' => []];
+   $array = ['token_accounts' => []];
+   $app_push->account_save($operator_type, $array);
+ ```
+
+  # 账号绑定与解绑
+ > array 根据开发文档->账号相关接口->账号设备绑定查询
+
+ | 参数名字      | 类型  | 说明                                                                            |
+ | ------------- | ----- | ------------------------------------------------------------------------------- |
+ | operator_type | int   | 类型看官方文档1-10                                                              |
+ | array         | array | 查看文档 |
+
+ ```
+   $operator_type = 1;
+   $array = ['account_list' => []];
+   $array = ['token_list' => []];
+   $app_push->account_query($operator_type, $array);
+ ```
+ 
