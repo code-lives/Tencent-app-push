@@ -83,7 +83,7 @@
    //1-8
    $operator_type = 1;
    $array = ['token_list' => []];
-   $tag_array = ['tag_token_list' => []];
+   $tag_array = ['tag_list' => []];
    $app_push->set_tag($operator_type, $array = [], $tag_array = []);
 
    //9-10
