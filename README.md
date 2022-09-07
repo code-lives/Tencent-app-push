@@ -3,7 +3,7 @@
 [官方接口文档](https://cloud.tencent.com/document/product/548/39059)
 # 安装
 ```
-composer require code-lives/app-push-tpns 1.0.0
+composer require code-lives/app-push-tpns 1.1.0
 ```
 
 # 配置参数说明
