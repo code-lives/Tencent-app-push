@@ -21,7 +21,6 @@ composer require code-lives/app-push-tpns 1.1.0
     $config = [
         'appid' => '',
         'secretKey' => '',
-        'message_type' => '',
         'environment'=>''
     ];
  ```
